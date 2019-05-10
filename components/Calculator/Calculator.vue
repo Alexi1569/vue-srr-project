@@ -324,12 +324,12 @@
   .calc-step-leave-active {
     position: absolute;
     opacity: 0;
-    transition: none;
+    transition: none !important;
   }
 
   .calc-step-enter,
   .calc-step-enter-active {
-    transition: .1s all cubic-bezier(.15,.95,.87,.95);
+    transition: .1s all cubic-bezier(.15,.95,.87,.95) !important;
     transform: translateX(-20%);
     opacity: 0;
   }
