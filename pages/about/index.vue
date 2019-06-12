@@ -52,7 +52,6 @@
         <div class="p-about__question flex ai-c jc-sb">
           <div class="p-about__video">
             <Video
-              v-in-viewport
               view="PAGE_ABOUT"
               :video="pageContent.question.video"
             />

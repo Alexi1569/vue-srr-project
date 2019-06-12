@@ -323,7 +323,7 @@
     }
 
     .contacts__block.contacts__block--bottom.in-viewport {
-      transform: translateX(50%);
+      transform: translateX(50%) !important;
     }
   }
 

@@ -37,7 +37,7 @@
       :btn="header.btn"
       @togglerClicked="handleTogglerClick"
       :allowClick="allowClick"
-      @menuClicked="handleMenuClicked"
+      @menuClicked="handleMenuClicked($event)"
     />
     <Modal
       v-show="modals.showProjectModal"
@@ -176,8 +176,8 @@
       }
     },
     methods: {
-      handleMenuClicked() {
-        if ($('.sidebar').hasClass('opened')) {
+      handleMenuClicked(e) {
+        if ($('.sidebar').hasClass('opened') && !e.target.closest('.nav__list-arrow')) {
           this.closeSideBar();
         }
       },
@@ -197,7 +197,7 @@
         this.$store.commit('closeSidebar');
         this.$store.commit('allowScroll');
         this.tl
-          .staggerFromTo($('.sidebar__nav-list li'), .5, {autoAlpha: 1, x: 0}, {autoAlpha: 0, x: 150, onStart: () => this.allowClick = false}, .15)
+          .staggerFromTo($('.sidebar__nav-list > li'), .5, {autoAlpha: 1, x: 0}, {autoAlpha: 0, x: 150, onStart: () => this.allowClick = false}, .15)
           .fromTo($('.sidebar__nav-list .nav__fill'), .5, {x: '0%', autoAlpha: 1}, {x: '100%', autoAlpha: 0, onComplete: () => this.tl.set($('.sidebar__nav-list .nav__fill'), {autoAlpha: 1})}, '-=.25')
           .fromTo($('.sidebar__nav-list'), .5, {x: '0%', autoAlpha: 1}, {x: '100%', autoAlpha: 0, onComplete: () => setTimeout(() => this.allowClick = true, 250)})
       },
@@ -214,7 +214,7 @@
           } else {
             this.tl.fromTo($('.sidebar__nav-list'), .5, {x: '100%', autoAlpha: 0}, {x: '0%', autoAlpha: 1, onStart: () => this.allowClick = false})
               .fromTo($('.sidebar__nav-list .nav__fill'), 1, {x: '100%', scaleX: 1.3, ease: Elastic.easeOut.config(1.2, 0.9)}, {x: '0%', scaleX: 1, ease: Elastic.easeOut.config(1.2, 0.9), onComplete: () => setTimeout(() => this.allowClick = true, 250)}, '+=.085')
-              .staggerFromTo($('.sidebar__nav-list li'), .45, {autoAlpha: 0, x: 150}, {autoAlpha: 1, x: 0,}, .15, '-=1.35')
+              .staggerFromTo($('.sidebar__nav-list > li'), .45, {autoAlpha: 0, x: 150}, {autoAlpha: 1, x: 0,}, .15, '-=1.35')
           }
         }
       },
@@ -222,8 +222,9 @@
     mounted() {
       document.addEventListener('click', (e) => {
         if (document.body.clientWidth > 650 && this.allowClick) {
-          if (e.target.closest('.nav__wrap') === null && document.querySelector('.sidebar').classList.contains('opened') && !e.target.closest('.sidebar__toggler')) {
+          if (e.target.closest('.nav__wrap') === null && document.querySelector('.sidebar').classList.contains('opened') && !e.target.closest('.sidebar__toggler') && !e.target.closest('.nav__list-arrow')) {
             this.closeSideBar();
+            
           }
         }
       });

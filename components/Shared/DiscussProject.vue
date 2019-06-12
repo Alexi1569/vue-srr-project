@@ -186,4 +186,10 @@
       width: 30%;
     }
   }
+
+  @media screen and (max-width: 500px) {
+    .s-discuss__form .form__inner-part:first-child {
+      width: 100%;
+    }
+  }
 </style>
