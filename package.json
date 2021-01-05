@@ -14,7 +14,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "axios-jsonp": "^1.0.2",
     "cyrillic-to-translit-js": "^2.2.0",
     "gsap": "^2.1.2",
